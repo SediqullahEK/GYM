@@ -1,0 +1,55 @@
+﻿@model GYM.Entity.User
+@{
+    ViewData["Title"] = "SignUp Page";
+    Layout = "_LoginLayout";
+}
+<script src="~/js/Pages Srcipts/Login.js"></script>
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+
+                <h1 class="heading-section" style="font-size:20px;">Welcome To VIP GYM</h1>
+                <div class="text-danger">
+                    @ViewBag.msg
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="login-wrap p-0">
+                    <h3 class="mb-2 text-center text-light">SignUp</h3>
+
+                    <form onsubmit="return submit();" method="post" class="signin-form" autocomplete="off">
+                        <div class="form-group">
+                            <input id="username" type="text" asp-for="Username" class="form-control" placeholder="Username" required>
+                        </div>
+                        <div class="form-group">
+                            <input id="password" asp-for="Password" type="password" class="form-control" placeholder="Password" required>
+                            <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                        </div>
+                        <div class="form-group">
+                            <input id="confirmPassword" type="password" class="form-control" placeholder="Confirm Password" required>
+                            <span toggle="#confirmPassword" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                        </div>
+                        <div id="confirm" class="text-danger">
+                            @ViewBag.m
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="form-control btn btn-primary submit px-3">Submit</button>
+                        </div>
+
+                    </form>
+                    <a class="w-100 text-center text-primary " asp-action="Login">Back to Login Page </a>
+                    <p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p>
+
+                    <div class="social d-flex text-center">
+                        <a href="https://www.facebook.com/login" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> Facebook</a>
+                        <a href="https://twitter.com/login" class="px-2 py-2 ml-md-1 rounded"><span class="ion-logo-twitter mr-2"></span> Twitter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

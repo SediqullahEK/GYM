@@ -1,0 +1,431 @@
+﻿@model GYM.Models.ItemInfo
+<style>
+    .btnSave {
+        background-color: rgb(28 8 8 / 0.94);
+    }
+
+        .btnSave:hover {
+            color: black;
+            background-color: rgb(78 15 15 / 0.97);
+        }
+
+    .btnCancel {
+        background-color: rgb(78 15 15 / 0.97);
+    }
+
+        .btnCancel:hover {
+            color: black;
+            background-color: rgb(28 8 8 / 0.94);
+        }
+
+    #trash:hover {
+        cursor: pointer;
+    }
+
+    #btn-edit:hover {
+        cursor: pointer;
+    }
+
+    #editbtn:hover {
+        cursor: pointer;
+    }
+
+    .custom-file-label::after {
+        left: 0;
+        right: auto;
+        border-left-width: 0;
+        border-right: inherit;
+    }
+
+    #searchBox {
+        background-color: rgb(78 15 15 / 0.67);
+    }
+
+        #searchBox::placeholder {
+            color: rgb(255 255 255 / 0.66);
+        }
+
+        #searchBox .search {
+            background-color: rgb(78 15 15 / 0.67);
+        }
+    .editModal{
+        background-color:rgb(0 0 0 / 0.20);
+    }
+        .editModal .mbody {
+            background-color: rgb(255 255 255 / 0.24);
+        }
+</style>
+
+<div class="text-center " style="margin-top:40px;">
+
+    <h1 class="text-light">Stock</h1>
+    <div class="success " style="position:absolute; top:30px;left:50px;" role="alert">
+
+    </div>
+</div>
+
+<div class="container  mt-4" style="position:absolute; top:150px; left:20px; ">
+  
+    <button type="button" class="btn btnSave text-light "
+            data-toggle="modal" data-target="#Add-modal">
+        <i class="fa fa-plus"> </i> Add To Stock
+    </button>
+    <div class="form-group mt-4">
+        <div class="input-group">
+
+            <div class="input-group-prepend">
+                <div class="input-group-text" style="background-color: rgb(78 15 15 / 0.67);"><i class="fa fa-search search text-light"></i></div>
+            </div>
+            <input id="searchBox" type="search" onchange="Search(this.value)" class="form-control text-light" placeholder="Search Items here..." />
+
+        </div>
+    </div>
+
+
+    <div class="PlaceHolderHere">
+        <div class="modal fade" id="Add-modal">
+            <div class="modal-dialog modal-lg" style="max-width:950px; max-height:400px;">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h3 class="modal-title">Add New Item</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <span>x</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div style="display:inline-block; float:left; max-width:400px; max-height:400px;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form method="post" id="addItem" enctype="multipart/form-data">
+
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <input type="hidden" asp-for="ID" />
+
+
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">#</div>
+                                                </div>
+                                                <span id="barcodeNotValid" class="text-danger"></span>
+                                                <input type="number" class="form-control align-items-center" onchange="BarcodeCheck(this.value)" id="Barcode" placeholder="Barcode" />
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <div class="form-group">
+                                                    <span id="nameNotValid" class="text-danger"></span>
+                                                    <input type="text" class="form-control  align-items-center" id="Name" placeholder="Item name" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <i class="fa fa-dollar-sign"></i>
+                                                            </div>
+                                                        </div>
+                                                        <span id="unitPriceNotValid" class="text-danger"></span>
+                                                        <input type="text" class="form-control align-items-center " id="UnitPrice" placeholder="Unit price" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <span id="quantityNotValid" class="text-danger"></span>
+                                                    <input type="number" class="form-control align-items-center " id="Quantity" placeholder="Quantity" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <span id="currencyNotValid" class="text-danger"></span>
+                                                <select class="form-control align-items-center " id="Currency">
+                                                    <option value="0" disabled hidden selected>
+                                                        Currnency
+                                                    </option>
+                                                    <option value="1">
+                                                        AFS
+                                                    </option>
+                                                    <option value="2">
+                                                        USD
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <span id="categoryNotValid" class="text-danger"></span>
+                                                    <select class="form-control align-items-center  " id="Category">
+                                                        <option value="0" disabled hidden selected>
+                                                            Category
+                                                        </option>
+                                                        <option value="1">
+                                                            Proteins
+                                                        </option>
+                                                        <option value="2">
+                                                            Grocery
+                                                        </option>
+                                                        <option value="3">
+                                                            Sporting Goods
+                                                        </option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="custom-file mb-3">
+                                                        <input asp-for="ImageFile" type="file" onchange="loadImage(this)" class="custom-file-input" id="ImageFile" name="filename">
+                                                        <label asp-for="ImageFile" style="text-align:right; cursor:pointer;" class="custom-file-label " for="ImageFile">Choose Image</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                            </div>
+                            <div class="warning" role="alert">
+
+                            </div>
+                        </div>
+
+                        <div style="border-left:1px solid rgb(0 0 0 / 0.80); float:left; height:500px; margin:0px 25px 0px 25px; "></div>
+                        <div style="display:inline-block; text-align:center; align-items:center; float:left;">
+                            <img src="#" id="targetImage" class="img " alt="Select an Image to display it here!" width="450" height="400" />
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer ">
+
+                        <button type="button" class="btn col-md-6 text-light mr-1 btnSave" id="btnSave">Add</button>
+
+                        <button type="button" class="btn col-md-6 text-light btnCancel" id="btnCancel" data-dismiss="modal">Cancel</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="View-all">
+
+        <table id="dataTable" class="table  table-hover  table-dark  ">
+
+            <thead class="Thead">
+                <tr>
+                    <th>Barcode Id</th>
+                    <th>Name</th>
+                    <th>Unit Price</th>
+                    <th>Currency</th>
+                    <th>Quantity</th>
+                    <th>Category</th>
+                    <th>Edit/Delete</th>
+
+
+                </tr>
+
+
+            </thead>
+            <tbody class="Tbody " id="tableBody">
+            </tbody>
+
+        </table>
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+        <div id="msg"></div>
+    </div>
+
+
+    <!-- Eidt Modal -->
+    <div class="modal editModal fade " id="editModal">
+        <div class="modal-dialog modal-lg" style="max-width:950px; max-height:200px;">
+
+            <div class="modal-content ">
+
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h3 class="modal-title">Edit Item</h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+
+                @Html.AntiForgeryToken()
+                <!-- Modal body -->
+                <div class="modal-body mbody">
+
+                    <hr style="width:90%;" />
+                    <div style="display:inline-block; float:left; max-width:400px; max-height:400px;">
+                        <form method="post">
+
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">#</div>
+                                    </div>
+                                    <span id="barcodeNotValid" class="text-danger"></span>
+                                    <input type="number" asp-for="Barcode" class="form-control align-items-center" name="uBarcode" id="uBarcode" placeholder="Barcode" />
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <span id="nameNotValid" class="text-danger"></span>
+                                        <input type="text" asp-for="Name" class="form-control  align-items-center" name="uName" id="uName" placeholder="Item name" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="fa fa-dollar-sign"></i>
+                                                </div>
+                                            </div>
+                                            <span id="unitPriceNotValid" class="text-danger"></span>
+                                            <input type="text" class="form-control align-items-center " name="UnitPrice" id="uUnitPrice" placeholder="Unit price" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <span id="quantityNotValid" class="text-danger"></span>
+                                        <input type="number" class="form-control align-items-center " name="Quantity" id="uQuantity" placeholder="Quantity" />
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <span id="currencyNotValid" class="text-danger"></span>
+                                    <select class="form-control align-items-center " id="uCurrency">
+                                        <option value="0" disabled hidden selected>
+                                            Currnency
+                                        </option>
+                                        <option value="1">
+                                            AFS
+                                        </option>
+                                        <option value="2">
+                                            USD
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <span id="categoryNotValid" class="text-danger"></span>
+                                        <select class="form-control align-items-center  " name="Category" id="uCategory">
+                                            <option value="0" disabled hidden selected>
+                                                Category
+                                            </option>
+                                            <option value="1">
+                                                Proteins
+                                            </option>
+                                            <option value="2">
+                                                Grocery
+                                            </option>
+                                            <option value="3">
+                                                Sporting Goods
+                                            </option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+
+                                        <input type="hidden" id="uId" value="" />
+
+                                        <div class="custom-file mb-3 pr-4">
+                                            <label class="custom-file-label " for="ImageFile">Choose file</label>
+                                            <input type="file" onchange="loadImage(this)" class="custom-file-input" id="ImageFile" name="filename">
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+
+
+                    <div style="border-left:1px solid rgb(0 0 0 / 0.80); float:left; height:500px; margin:0px 25px 0px 25px; "></div>
+                    <div style="display:inline-block; text-align:center; align-items:center; float:left;">
+
+                        <img src="" id="targetEditImage" class="img " alt="Select an Image to display it here!" width="450" height="400" />
+                    </div>
+                </div>
+
+
+                <div class="modal-footer pt-1 pb-0">
+                    <button type="button" id="updateBtn" class="btn text-light col-md-6 btnSave mt-3 ">Update</button>
+                    <button type="button" class="btn col-md-6 text-light btnCancel mb-3 " id="btnCancel" data-dismiss="modal">Cancel</button>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+    });
+
+    function loadImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $("#targetImage").attr("src", e.target.result);
+
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+
+<script src="~/js/Pages Srcipts/Stock.js"></script>

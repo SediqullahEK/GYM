@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewData["Title"] = "Registration";
+}
+
+
+
+<div class="container">
+
+    <h1 class="text-light align-content-center mt-5  text-center">Show Athletes</h1>
+    
+    <br />
+    <br />
+    <br />
+    <a asp-controller="Signin" asp-action="addAth" class="btn btn-info">ADD NEW ATHLETE</a>
+
+    <br />
+
+    <table class="table table-striped table-hover mb-4  table-responsive-sm mt-5 table-dark">
+        <thead class="Thead">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Lastname
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Phone
+                </th>
+                <th>
+                    Gender
+                </th>
+                <th>
+                    Address
+                </th>
+                <th>
+                    Entrance Date
+                </th>
+                <th>
+                    Details
+                </th>
+                <th>
+                    Edit/Delete    
+                </th>
+            </tr>
+        </thead>
+        <tbody class="Tbody">
+            @foreach (var x in ViewBag.Ath)
+            {
+
+                <tr>
+                    <td>
+                        @x.Name
+                    </td>
+                    <td>
+                        @x.LastName
+                    </td>
+                    <td>
+                        @x.Email
+                    </td>
+                    <td>
+                        @x.Phone
+                    </td>
+                    <td>
+                        @foreach (var g in ViewBag.Gender)
+                        {
+                            @if (x.Gender == g.Id)
+                            {
+                                @g.Name
+                            }
+
+
+                        }
+
+                    </td>
+                    <td>
+                        @x.Address
+                    </td>
+                    <td>
+                        @x.EntranceDate
+                    </td>
+                    <td>
+                        <a href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">More Details</a>
+                    </td>
+
+                    <td>
+                        <a onclick="return f();" style="color: rgb(200 0 0 / 0.76); text-decoration: none; " asp-controller="Signin" asp-route-Id="@x.Id" asp-action="deletAth"><i class="fa fa-trash "></i></a>
+                        <a style="color: rgb(200 0 0 / 0.76); text-decoration: none; float: left; " asp-controller="Signin" asp-route-Id="@x.Id" asp-action="editAth"><i class="fa fa-edit mr-4"></i></a>
+
+                    </td>
+                </tr>
+
+           
+             }
+
+
+
+        </tbody>
+
+
+    </table>
+   
+</div>
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover();
+    });
+
+    function f() {
+        var m = confirm("Do you want to delete the record perminently???");
+        return m;
+    }
+</script>
+
+
+
+
+
+

@@ -1,0 +1,138 @@
+﻿@*@model GYM.Entity.Item
+
+<div class="PlaceHolderHere">
+    <div class="modal fade" id="Add-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Item</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal">
+                        <span>x</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form method="post" asp-action="AddOrEditStock" onsubmit=" return jQueryAjaxPost(this);" autocomplete="off">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <input type="hidden" asp-for="Id" />
+                                <input type="hidden" asp-for="CreatedOn" />
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">#</div>
+                                        </div>
+                                        <span asp-validation-for="Barcode" class="text-danger"></span>
+                                        <input type="text" class="form-control align-items-center" asp-for="Barcode" placeholder="Barcode" required />
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <span asp-validation-for="Barcode" class="text-danger"></span>
+                                            <input type="text" class="form-control  align-items-center" asp-for="Name" placeholder="Item name" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <i class="fa fa-dollar-sign"></i>
+                                                    </div>
+                                                </div>
+                                                <span asp-validation-for="Barcode" class="text-danger"></span>
+                                                <input type="text" class="form-control align-items-center " asp-for="UnitPrice" placeholder="Unit price" required />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <span asp-validation-for="Barcode" class="text-danger"></span>
+                                            <input type="text" class="form-control align-items-center " asp-for="Quantity" placeholder="Quantity" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span asp-validation-for="Barcode" class="text-danger"></span>
+                                        <select class="form-control align-items-center " asp-for="Currency" required>
+                                            <option value="0" disabled hidden selected>
+                                                Currnency
+                                            </option>
+                                            <option value="1">
+                                                AFS
+                                            </option>
+                                            <option value="2">
+                                                USD
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <span asp-validation-for="Barcode" class="text-danger"></span>
+                                            <select class="form-control align-items-center  " asp-for="Category" required>
+                                                <option value="0" disabled hidden selected>
+                                                    Category
+                                                </option>
+                                                <option value="1">
+                                                    Proteins
+                                                </option>
+                                                <option value="2">
+                                                    Grocery
+                                                </option>
+                                                <option value="3">
+                                                    Sporting Goods
+                                                </option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" asp-for="ImageFile" class="form-control " style="cursor:pointer" onfocus="(this.type = 'file')" placeholder="Choose Item Image " /> <i class="fa fa-image float-right"></i>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" value="ADD" class="btn btn-dark btn-outline-danger text-light" />
+                                </div>
+
+                            </form>
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" data-save="modal">Add</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var PlaceHolderElement = $('#PlaceHolderHere');
+        $('button[data-toggle="Add-modal"]').click(function (event) {
+
+            var url = $(this).data('url');
+            $.get(url).done(function (data) {
+                PlaceHolderElement.find('.modal').modal('show');
+
+            })
+
+        })
+    })
+</script>*@

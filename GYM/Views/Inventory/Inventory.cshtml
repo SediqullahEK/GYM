@@ -1,0 +1,92 @@
+﻿@@model GYM.Entity.Item
+@{
+    ViewData["Title"] = "Inventory";
+}
+
+<div class="text-center">
+    <h1 class="text-light">showItems</h1>
+    <hr style="height:2px; background-color:white; " />
+</div>
+
+<div class="container">
+    <a onclick="ShowInPopup('@Url.Action("AddOrEditStock","Signin",null,Context.Request.Scheme )','New Item')" class="btn btn-dark btn-outline-danger"><i class="fa fa-plus"></i>Add New Item To Stock</a>
+    <table class="table table-striped table-hover mb-4  table-dark table-responsive-sm mt-5">
+        <thead class="Thead">
+            <tr>
+                <th>
+                    Barcode ID
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Unite Price
+                </th>
+                <th>
+                    Currency
+                </th>
+                <th>
+                    Category
+                </th>
+                <th>
+                    Quantity
+                </th>
+
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody class="Tbody">
+            @foreach (var x in ViewBag.Items)
+            {
+                <tr>
+                    <td>
+                        @x.Barcode
+                    </td>
+                    <td>
+                        @x.Name
+                    </td>
+                    <td>
+                        @x.UnitPrice
+                    </td>
+                    <td>
+                        @foreach (var g in ViewBag.Currency)
+                        {
+                            @if (@x.Currency == @g.Id)
+                            {
+                                @g.Name
+                            }
+                        }
+                    </td>
+
+                    <td>
+                        @x.Category
+                    </td>
+                    <td>
+                        @x.Quantity
+                    </td>
+                    <td>
+                        <a onclick="return f();" style="color: rgb(200 0 0 / 0.76); text-decoration: none; cursor:pointer; " asp-controller="Signin" asp-route-Id="@x.Id" asp-action="DeleteItem"><i class="fa fa-trash "></i></a>
+                        <a>
+                            <a data-toggle="modal" data-target="#editModal" style="color: rgb(200 0 0 / 0.76); text-decoration: none; float: left; cursor:pointer "><i class="fa fa-edit mr-4"></i></a>
+                        </a>
+
+
+                    </td>
+                </tr>
+            }
+        
+
+        </tbody>
+
+
+    </table>
+</div>
+<script>
+    function f() {
+        var m = confirm("Do you want to delete the record perminently???");
+        return m;
+    }
+</script>
+

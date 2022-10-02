@@ -1,0 +1,41 @@
+﻿
+
+@{
+    ViewData["Title"] = "Pagesetting";
+}
+
+<div class="container-fluid align-content-center text-center " style="margin-top:50px">
+    <div class="row">
+        <div class="col-4 p-4 ">
+            <a  id="link" asp-area="" asp-controller="Signin" asp-action="Pagecontent" > <i class="fa fa-book-open " ></i><br />Page Content</a>
+        </div>
+        <div class="col-4  p-4">
+            <a  id="link" asp-area="" asp-controller="Signin" asp-action="Student" > <i class="fa fa-users " ></i><br />Student Info</a>
+        </div>
+        <div class="col-4  p-4 ">
+            <a  id="link" asp-area="" asp-controller="Signin" asp-action="User" > <i class="fa fa-users " ></i><br />User Info</a>
+        </div>
+
+    </div>
+    <div class="row">
+
+        <div class="col-4  p-4 ">
+            <a  id="link" asp-area="" asp-controller="Signin" asp-action="Staff" > <i  class="fa fa-house-user " ></i><br />Staff Info</a>
+        </div>
+        <div class="col-4 text-center   p-4">
+            <a  id="link" asp-area="" asp-controller="Signin" asp-action="Equiepment" > <i  class="fa fa-dumbbell " ></i><br />Club Equipment</a>
+        </div>
+        <div class="col-4 text-center   p-4">
+            <a id="link" asp-area="" asp-controller="Signin" asp-action="Income" > <i   class="fa fa-money-check " ></i><br />Total Income and Expense</a>
+        </div>
+    </div>
+    <div class="row text-center ">
+        <div class="col-4 text-center   p-4">
+            <a id="link" asp-area="" asp-controller="Signin" asp-action="Message" > <i   class="fa fa-envelope " ></i><br />Messages List</a>
+        </div>
+        <div class="col-4 text-center   p-4">
+            <a id="link"  asp-area="" asp-controller="Signin" asp-action="Logout"> <i class="fa fa-sign-out-alt "></i><br />Exit</a>
+        </div>
+    </div>
+</div>
+

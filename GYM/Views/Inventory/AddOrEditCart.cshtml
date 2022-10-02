@@ -1,0 +1,38 @@
+﻿@model GYM.Entity.Sale
+
+    <div class="container row pb-3 mb-4">
+        <div class="mt-2 text-center">
+            <h1 style="display:inline;" class="text-light ">Add To Cart</h1>
+          
+        </div>
+        <br />
+
+        <div class="align-items-center col-md-4">
+            <form method="post" asp-controller="Signin" asp-action="AddOrEditStock" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="CreatedOn" />
+                <div class="form-group">
+                    <input type="text" class="form-control col-4 align-items-center" asp-for="BarcodeId" placeholder="Barcode" />
+                    <input type="text" class="form-control col-4 align-items-center" asp-for="ItmName" placeholder="Item name" />
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control col-4 align-items-center " asp-for="SoldPrice" placeholder="Unit price" />
+                    <input type="text" class="form-control col-4 align-items-center " asp-for="Quantity" placeholder="Quantity" />
+
+                </div>
+
+               
+
+                <div class="form-group">
+                    <button class="btn btn-dark border-danger  mb3">ADD</button>
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
+
+
+

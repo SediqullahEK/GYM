@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GYM</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/MyStyle.css" />
+    <link rel="stylesheet" href="~/css/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/css/fontawesome.min.css" />
+
+    <script src="~/lib/jquery/jquery.js"></script>
+    
+  
+    
+    <script src="~/js/Pages Srcipts/Inventory.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js?v=1" asp-append-version="true"></script>
+    <script src="~/js/notify.min.js" asp-append-version="true"></script>
+    
+</head>
+
+<body id="createbg">
+    
+
+        <img style="float: right; position: fixed; right: 0;" id="logo" width="250" height="300"  src="~/img/logo.png" />
+
+    <div class="sidebar">
+        <div id="P" class="logo-details bar ">
+            <i class='fa fa-bars '></i>
+
+            <span class="logo_name">VIP GYM</span><br />
+
+
+        </div>
+        <ul class="nav-links">
+            <li>
+                <div class="iocn-link">
+                    <a asp-area="" asp-controller="Home" asp-action="Index">
+                        <i class='fa fa-home'></i>
+                        <span class="link_name">Home</span>
+                    </a>
+                </div>
+                <ul class="sub-menu">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index" class="link_name">Home</a></li>
+
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a asp-area="" asp-controller="Inventory" asp-action="ShowItems">
+                        <i class="fa fa-boxes"></i>
+                        <span class="link_name">Inventory</span>
+                    </a>
+                    <i class='fa fa-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a asp-area="" asp-controller="Inventory" asp-action="Inventory" class="link_name">Inventory</a></li>
+                    <li><a asp-controller="Inventory" asp-action="ShowItems">Stock</a></li>
+                    <li><a asp-controller="Inventory" asp-action="OnCart">Sales</a></li>
+
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a asp-area="" asp-controller="Home" asp-action="Registration">
+                        <i class='fa fa-clipboard-list'></i>
+                        <span class="link_name">Registration</span>
+                    </a>
+                    <i class='fa fa-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Registration" class="link_name">Registration</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Registration">Athlete Registration</a></li>
+                    <li><a asp-area="" asp-controller="Inventory" asp-action="ShowStaff">Staff Registration</a></li>
+
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a asp-area="" asp-controller="Inventory" asp-action="User">
+                        <i class='fa fa-user'></i>
+                        <span class="link_name">User</span>
+                    </a>
+                    <i></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a asp-area="" asp-controller="Inventory" asp-action="User" class="link_name">User</a></li>
+
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+
+                    <a asp-area="" asp-controller="Home" asp-action="Finance">
+                        <i class='fa fa-dollar-sign'></i>
+                        <span class="link_name">Finance</span>
+                    </a>
+
+                </div>
+                <ul class="sub-menu">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Finance" class="link_name">Finance</a></li>
+                </ul>
+
+            </li>
+
+            <li>
+
+                <a href="#">
+                    <i class="fa fa-cog"></i>
+                    <span class="link_name">Setting</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Setting</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="profile-details">
+                    <div class="profile-content">
+                        <img src="~/img/1.jpg" alt="profile">
+                    </div>
+                    <div class="name-job">
+                        <div class="profile_name">Sediqullah<br /> Ekhtyar</div>
+                        <div class="job">Developer</div>
+                    </div>
+                    <i class='bx bx-log-out'></i>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+    <section class="home-section ">
+
+        @RenderBody()
+    </section>
+    @*<div class="loaderbody" id="loaderbody">
+            <div class="loader"></div>
+        </div>*@
+
+    <footer class="border-top footer text-muted position-fixed mb-0">
+        <div class="container position-fixed mb-0">
+            &copy; 2021 - GYM - <a>Privacy</a>
+        </div>
+    </footer>
+   @* <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
+
+    <script>
+        let arrow = document.querySelectorAll(".arrow");
+        for (var i = 0; i < arrow.length; i++) {
+            arrow[i].addEventListener("click", (e) => {
+                let arrowParent = e.target.parentElement.parentElement;
+                arrowParent.classList.toggle("showMenu");
+            });
+        }
+
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".bar");
+        console.log(sidebarBtn);
+        sidebarBtn.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
+        });
+    </script>
+
+
+
+
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

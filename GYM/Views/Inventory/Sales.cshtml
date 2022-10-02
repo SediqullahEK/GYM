@@ -1,0 +1,192 @@
+﻿
+<style>
+    .FormInput {
+        background: none;
+        border: none;
+        outline: none;
+        background-color: rgb(78 15 15 / 0.67);
+        box-shadow:1px 2px 10px;
+        border-radius:5px;
+        text-align: left;
+        padding: 10px 20px;
+        margin-right:20px;
+        color: white;
+    }
+        .FormInput:focus {
+            background-color: rgb(78 15 15 / 0.71);
+        }
+    .Bill{
+        margin-top:30px;
+    }
+    .FormInput::placeholder {
+        outline: none;
+        color: rgb(255 255 255);
+    }
+       
+    #searchBox {
+        background-color: rgb(78 15 15 / 0.67);
+        padding:20px;
+    }
+
+        #searchBox::placeholder {
+            color: rgb(255 255 255 / 0.66);
+        }
+
+        .search {
+            background-color: rgb(78 15 15 / 0.67);
+            
+        }
+    .btnAdd {
+        background-color: rgb(28 8 8 / 0.94);
+    }
+
+        .btnAdd:hover {
+            color: black;
+            background-color: rgb(78 15 15 / 0.97);
+            cursor:pointer;
+        }
+
+    .btnCancel {
+        background-color: rgb(78 15 15 / 0.97);
+    }
+
+        .btnCancel:hover {
+            color: black;
+            background-color: rgb(28 8 8 / 0.94);
+            cursor:pointer;
+        }
+    #showBill{
+        font-size:17px;
+    }
+        #showBill:hover {
+            font-size: 18px;
+            cursor: pointer;
+            color: #fff;
+            text-decoration:underline;
+        }
+</style>
+
+<div class="container mt-4" style="max-width:90%;">
+    <div class="text-center">
+        
+        <div class="success float-left" role="alert" style="display:none;">
+
+        </div>
+        <h1 class="text-light">Sales Cart</h1>
+    </div>
+    <!-- Button to Open the Modal -->
+
+    <form method="post" id="addItem" enctype="multipart/form-data" class="ml-3">
+
+        <div class="row" style=" margin-top:30px; texde">
+            <input type="hidden" id="ID" />
+            <div>
+                <div class="form-group">
+                    <span id="barcodeNotValid" class="text-danger" style="font-size:25px;"></span>
+                    <input type="number" class="  FormInput" id="Barcode" onchange="GetItem(this.value)" placeholder="Barcode" />
+                </div>
+            </div>
+
+            <div>
+
+                <input type="text" class="FormInput" disabled id="Name" placeholder="Item name" />
+
+            </div>
+            <div>
+
+                <input type="text" class="FormInput " disabled id="UnitPrice" placeholder="Unit Price" /><!--Currency should be added !!!!!!!!!!!-->
+
+            </div>
+            <div>
+
+                <select class="FormInput " id="Category">
+                    <option class="selectoption" value="0" disabled hidden selected>
+                        Category
+                    </option>
+                    <option disabled style="color:rgb(233 223 223 / 0.77)" value="1">
+                        Proteins
+                    </option>
+                    <option disabled style="color:rgb(233 223 223 / 0.77)" value="2">
+                        Grocery
+                    </option>
+                    <option disabled style="color:rgb(233 223 223 / 0.77)" value="3">
+                        Sporting Goods
+                    </option>
+
+                </select>
+            </div>
+        </div>
+
+        <div class="row" style="">
+            <span id="quantityNotValid" class="text-danger" style="font-size:25px;"></span>
+
+            <input type="number" class="FormInput " id="Quantity" placeholder="* Quantity" />
+
+            <span id="soldPriceNotValid" class="text-danger" style="font-size:25px;"></span>
+            <input type="text" class="FormInput " id="SoldPrice" placeholder="* Sold Price" />
+
+            <select class="FormInput " id="Currency">
+                <option style="color:rgb(233 223 223 / 0.77)" value="0" disabled hidden selected>
+                    Currency
+                </option>
+                <option disabled style="color:rgb(233 223 223 / 0.77)" value="1">
+                    AFS
+                </option>
+                <option disabled style="color:rgb(233 223 223 / 0.77)" value="2">
+                    USD
+                </option>
+            </select>
+        </div>
+        <br />
+        <div class="row mt-3">
+            <input type="submit" id="btnAdd" class="btn btnAdd text-light pl-5 pr-5 mr-2" value="Add" />
+            <input type="submit" id="btnUpdate" class="btn btnAdd text-light pl-5 pr-5 mr-2" style="display:none;" value="Update" />
+            <input type="button" class="btn btnCancel text-light pl-5 pr-5" value="Clear" onclick="Clear(null)" />
+
+        </div>
+
+    </form>
+    <br />
+    <a id="showBill" class="text-light float-lg-right "  data-toggle="collapse" data-target="#Bill">
+       
+        Show the Bill
+        <i class="fa fa fa-chevron-down arrow d-inline-block text-light"></i>
+    </a>
+    <div id="Bill" class="collapse fade in">
+        
+        <div class="Bill" style="max-width:100%;">
+            <h2 class="text-light">Sold Bill</h2>
+            @*<div class="form-group ">
+                <div class="input-group">
+
+                    <div class="input-group-prepend">
+                        <div class="input-group-text search "><i class="fa fa-search text-light"></i></div>
+                    </div>
+                    <input id="searchBox" type="search" onchange="Search(this.value)" class="form-control text-light" placeholder="Search Items here..." />
+
+                </div>
+            </div>*@
+
+            <table id="salesTable" class="table table-striped   text-light">
+                <thead class="Thead">
+                    <tr>
+                        <th>ID</th>
+                        <th>Item Name</th>
+                        <th>Unit Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody class="Tbody" id="tableBody">
+                </tbody>
+
+            </table>
+
+        </div>
+        <button class="btn btn-info" onclick="PrintBill()">Print Bill</button>
+    </div>
+
+</div>
+ 
+<script src="~/js/Pages Srcipts/Sales.js"></script>

@@ -1,0 +1,57 @@
+﻿@model GYM.Entity.User
+@{
+    ViewData["Title"] = "Login Page";
+    Layout = "_LoginLayout";
+}
+
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+
+                    <h1 class="heading-section" style="font-size:20px;">Welcome To VIP GYM</h1>
+                    <div class="text-danger">
+                        @ViewBag.msg
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="login-wrap p-0">
+                        <h5 class="mb-2 text-center text-light">Have an account?</h5>
+                        <form asp-controller="Login" asp-action="Login" class="signin-form">
+                            <div class="form-group">
+                                <input type="text" asp-for="Username" class="form-control" placeholder="Username" required>
+                            </div>
+                            <div class="form-group">
+                                <input id="password-field" asp-for="Password" type="password" class="form-control" placeholder="Password" required>
+                                <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-control btn btn-primary submit px-3">Login</button>
+                            </div>
+                            <div class="form-group d-md-flex">
+                                <div class="w-50">
+                                    <label class="checkbox-wrap checkbox-primary">
+                                        Remember Me
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="w-50 text-md-right">
+                                    <a href="#" style="color: #fff">Forgot Password</a>
+                                </div>
+                            </div>
+                        </form>
+                        <p><a class="w-100 text-center text-primary " asp-action="SignUp">No Account?... SignUp </a></p>
+                        <p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p>
+                        <div class="social d-flex text-center">
+                            <a href="https://www.facebook.com/login" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> Facebook</a>
+                            <a href="https://twitter.com/login" class="px-2 py-2 ml-md-1 rounded"><span class="ion-logo-twitter mr-2"></span> Twitter</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+

@@ -1,0 +1,72 @@
+﻿
+
+@model GYM.Entity.Athlete
+@{
+    ViewData["Title"] = "Athlete Registration";
+}
+
+
+
+<div class="container mt-3 mr-lg-5 mb-4">
+    <div class="mt-4 text-light">
+        <h1 style="display:inline;">Athlete Registration</h1>
+
+    </div>
+
+
+    <br />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div>
+        <form method="post" asp-controller="Signin" asp-action="addAth">
+
+            <span asp-validation-for="Name" class="text-danger"></span>
+            <br /><input type="text" asp-for="Name" class=" form-control  col-6 mr-2 align-items-center" placeholder="Name" />
+
+
+            <br />  <span asp-validation-for="LastName" class="text-danger"></span>
+            <input type="text" asp-for="LastName" class=" form-control col-6  align-items-center " placeholder="LastName" />
+
+            <br /> <span asp-validation-for="Email" class="text-danger"></span>
+            <input type="email" asp-for="Email" class=" form-control  col-6 mr-2 align-items-center" placeholder="Email" />
+
+            <br />  <span asp-validation-for="Phone" class="text-danger"></span>
+            <input type="number" asp-for="Phone" class=" form-control col-6 align-items-center  " placeholder="Phone" />
+
+            <span asp-validation-for="Address" class="text-danger"></span>
+            <br />  <input type="text" asp-for="Address" class=" form-control col-6 mr-2align-items-center " placeholder="Address" />
+
+            <br />
+            <span asp-validation-for="Gender" class="text-danger"></span>
+            <select class=" form-control col-6 align-items-center " asp-for="Gender">
+                <option value="0" disabled selected hidden>
+                    Gender
+                </option>
+                <option value="1">
+                    Male
+                </option>
+                <option value="2">
+                    Female
+                </option>
+                <option value="3">
+                    Other
+                </option>
+            </select>
+
+            <span asp-validation-for="EntranceDate" class="text-danger"></span>
+            <br /> <input type="text" class=" form-control col-6" placeholder="Entrance Date" asp-for="EntranceDate" onfocus="(this.type = 'date')" />
+            <br />
+            <input type="file" asp-for="Image" class=" form-control col-6 mr-2align-items-center " value="Select an Image" />
+
+            <br /> <button type="submit" id="updateBtn" class="btn btn-success mb3 ">Add</button>
+
+        </form>
+        <a asp-controller="Signin" asp-action="ShowAth" class="btn btn-info mb3 ">Back</a>
+    </div>
+</div>
+    @section Scripts{
+
+        @{<partial name="_ValidationScriptsPartial" /> }
+
+    }
+
